@@ -1,0 +1,56 @@
+﻿@page
+@model AspNetCoreIdentity.Pages.Account.RegisterModel
+@{
+}
+<p>
+    <h3>User Registration</h3>
+</p>
+
+<div class="container" border style="padding:20px">
+    <form method="post">
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="RegisterVm.Email"></label>
+            </div>
+            <div class="col-5">
+                <input type="text" asp-for="RegisterVm.Email" class="form-control" />
+            </div>
+            <span class="text-danger" asp-validation-for="RegisterVm.Email"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="RegisterVm.Password"></label>
+            </div>
+            <div class="col-5">
+                <input type="password" asp-for="RegisterVm.Password" class="form-control" />
+            </div>
+            <span class="text-danger" asp-validation-for="RegisterVm.Password"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="RegisterVm.Position"></label>
+            </div>
+            <div class="col-5">
+                <input type="text" asp-for="RegisterVm.Position" class="form-control" />
+            </div>
+            <span class="text-danger" asp-validation-for="RegisterVm.Position"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <label asp-for="RegisterVm.Department"></label>
+            </div>
+            <div class="col-5">
+                <input type="text" asp-for="RegisterVm.Department" class="form-control" />
+            </div>
+            <span class="text-danger" asp-validation-for="RegisterVm.Department"></span>
+        </div>
+        <div class="form-group row">
+            <div class="col-2">
+                <input type="submit" value="Register" class="btn btn-primary" />
+            </div>
+            <div class="col">
+            </div>
+        </div>
+    </form>
+</div>

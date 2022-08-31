@@ -47,6 +47,13 @@ namespace Web_API
                     ClockSkew = TimeSpan.Zero
                 };
             });
+            services.AddAuthorization(options => 
+            {
+                options.AddPolicy("AdminOnly", policy =>
+                {
+                    policy.RequireClaim("Admin");
+                });
+            });
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

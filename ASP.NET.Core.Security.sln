@@ -5,7 +5,9 @@ VisualStudioVersion = 16.0.32802.440
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnderTheHood", "UnderTheHood\UnderTheHood.csproj", "{2883C5AA-0BA0-4122-BE27-FE2A846A6DEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Web API", "Web API\Web API.csproj", "{7D97394F-1B2E-4173-9830-1592C64EF690}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web API", "Web API\Web API.csproj", "{7D97394F-1B2E-4173-9830-1592C64EF690}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreIdentity", "AspNetCoreIdentity\AspNetCoreIdentity.csproj", "{C7D96A2E-2261-415A-8FFB-B261E0D193BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -21,6 +23,10 @@ Global
 		{7D97394F-1B2E-4173-9830-1592C64EF690}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7D97394F-1B2E-4173-9830-1592C64EF690}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7D97394F-1B2E-4173-9830-1592C64EF690}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7D96A2E-2261-415A-8FFB-B261E0D193BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7D96A2E-2261-415A-8FFB-B261E0D193BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7D96A2E-2261-415A-8FFB-B261E0D193BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7D96A2E-2261-415A-8FFB-B261E0D193BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -28,8 +28,11 @@ namespace UnderTheHood.Pages
         }
         public async Task OnGet()
         {
-            
+            WeatherForecastItems = await InvokeEndpoint<List<WeatherForecastDto>>("api/WeatherForecast", "UnderTheHoodClient");
+        }
 
+        private async Task<T> InvokeEndpoint<T>(string url, string clientName)
+        {
             //get token from session
             JwtToken token = null;
             var strTokenObj = HttpContext.Session.GetString("access_token");
@@ -37,15 +40,7 @@ namespace UnderTheHood.Pages
             // generate a new token from authProvider if existing token has expired
             if (string.IsNullOrEmpty(strTokenObj))
             {
-                var res = await httpClient.PostAsJsonAsync("api/Auth", new Credential()
-                {
-                    UserName = "admin",
-                    Password = "password"
-                });
-                res.EnsureSuccessStatusCode();
-                var strJwt = await res.Content.ReadAsStringAsync();
-                httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
-                
+                token = await Authenticate();
             }
             else
             {
@@ -55,16 +50,17 @@ namespace UnderTheHood.Pages
 
             if (token == null || string.IsNullOrEmpty(token.AccessToken) || token.ExpiresAt <= DateTime.UtcNow)
             {
-                
+                token = await Authenticate();
             }
 
-            
-            // Authentication and getting the token
 
-            WeatherForecastItems = await httpClient.GetFromJsonAsync<List<WeatherForecastDto>>("api/WeatherForecast");
+            // Authentication and getting the token
+            var httpClient = _httpClientFactory.CreateClient(clientName);
+            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+             return await httpClient.GetFromJsonAsync<T>(url);
         }
 
-        private async Task<JwtToken> Authenticate(string url, Credential credential)
+        private async Task<JwtToken> Authenticate()
         {
             var httpClient = _httpClientFactory.CreateClient("UnderTheHoodClient");
             var res = await httpClient.PostAsJsonAsync("api/Auth", new Credential()
@@ -74,7 +70,8 @@ namespace UnderTheHood.Pages
             });
             res.EnsureSuccessStatusCode();
             var strJwt = await res.Content.ReadAsStringAsync();
-            httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token.AccessToken);
+            HttpContext.Session.SetString("access_token", strJwt);
+            return JsonConvert.DeserializeObject<JwtToken>(strJwt);
         }
     }
 }
